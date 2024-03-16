@@ -16,6 +16,7 @@
     "@clerk/nextjs": "^4.29.9",
     "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.11.0",
+    "@react-stately/data": "^3.11.2",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.13",

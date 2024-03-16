@@ -6,20 +6,24 @@ async function main() {
   //   data: [
   //     ...categories.map((category) => ({ name: category })),
   //   ],
-  //   skipDuplicates: true, // Skip 'duplicates' (if any) and continue with the next operation
+  //   skipDuplicates: true,
   // })
+  // console.log(response)
   for (const category of categories) {
-    const response = await prisma.category.update({
-      where: {
-        name: category.toLowerCase()
-      },
-      data: {
-        name: category
-      }
-    })
-    console.log(response)
-  }
+    try {
+      await prisma.category.update({
+        where: {
+          name: category.toLowerCase()
+        },
+        data: {
+          name: category
+        }
+      })
 
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 main()
   .then(async () => {
