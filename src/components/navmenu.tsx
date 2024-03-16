@@ -52,8 +52,12 @@ export default function NavMenu({ userLoggedIn }: Props) {
       <NavbarContent justify="end">
         {userLoggedIn ? (
           <Fragment>
-            <IdeasGeneratorButton />
-            <UserButton afterSignOutUrl='/sign-in' />
+            <NavbarItem className="hidden sm:flex">
+              <IdeasGeneratorButton />
+            </NavbarItem>
+            <NavbarItem className="hidden sm:flex">
+              <UserButton afterSignOutUrl='/sign-in' />
+            </NavbarItem>
           </Fragment>
         ) : (
           <Fragment>
@@ -75,7 +79,11 @@ export default function NavMenu({ userLoggedIn }: Props) {
       </NavbarContent>
       {/* mobile menu */}
       <NavbarMenu>
-        {userLoggedIn ? <IdeasGeneratorButton /> : (
+        {userLoggedIn ? (
+          <NavbarMenuItem>
+            <IdeasGeneratorButton />
+          </NavbarMenuItem>
+        ) : (
           <Fragment>
             <NavbarMenuItem>
               <Button className="w-full" as={Link} color="primary" href="/login" variant="flat">
