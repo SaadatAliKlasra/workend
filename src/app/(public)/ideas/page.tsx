@@ -27,7 +27,7 @@ const Page = ({ searchParams }: {
         <div className="flex space-x-2 p-4">
           <SearchChip items={searchParams?.industries} />
         </div>
-        <Suspense key={searchParams?.industries?.join() || searchParams?.search || searchParams?.page || Math.random()} fallback={<IdeasListPlaceholder count={8} />}>
+        <Suspense key={searchParams?.industries?.join() || searchParams?.search || searchParams?.page} fallback={<IdeasListPlaceholder count={8} />}>
           <IdeasList searchParams={searchParams} />
         </Suspense>
       </div>
