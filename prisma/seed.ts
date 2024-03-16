@@ -21,7 +21,11 @@ async function main() {
       })
 
     } catch (error) {
-      console.log(error)
+      await prisma.category.create({
+        data: {
+          name: category
+        }
+      })
     }
   }
 }
