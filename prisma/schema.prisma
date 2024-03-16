@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Idea {
+  id              String           @id @default(uuid())
+  slug            String           @unique
+  userId          String
+  detail          String           @unique @db.Text
+  industries      Industry[]
+  targetAudiences TargetAudience[]
+  businessModels  BusinessModel[]
+
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  likes      IdeaLike[]
+  category   Category?  @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+  @@index([userId, id])
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  ideas Idea[]
+
+  @@index([name])
+}
+
+model Industry {
+  id    String @id @default(uuid())
+  name  String @unique
+  ideas Idea[]
+}
+
+model TargetAudience {
+  id    String @id @default(uuid())
+  name  String @unique
+  ideas Idea[]
+}
+
+model BusinessModel {
+  id    String @id @default(uuid())
+  name  String @unique
+  ideas Idea[]
+}
+
+model IdeaLike {
+  id     String @id @default(uuid())
+  idea   Idea   @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId String
+  userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([ideaId, userId])
+  @@index([ideaId])
+}
