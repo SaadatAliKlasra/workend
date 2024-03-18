@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       },
       {
         role: "user",
-        content: `generate a unique business idea that solves a specific problem in the ${category} industry.`,
+        content: `generate a business idea from ${category} industry.`,
       }
     ];
 
