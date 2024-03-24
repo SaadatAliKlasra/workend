@@ -12,7 +12,7 @@ export async function fetchIdeas(
   orderBy: object = { createdAt: 'desc' }
 ) {
   // wait for 5 seconds
-  // await new Promise(resolve => setTimeout(resolve, 5000))
+  await new Promise(resolve => setTimeout(resolve, 5000))
   // const perPage = 16
   const offset = (page - 1) * perPage
   // Start with an empty where object
