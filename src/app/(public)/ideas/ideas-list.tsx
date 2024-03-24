@@ -2,7 +2,7 @@
 import IdeaItem from "./idea-item";
 import { fetchIdeas } from "@/actions/fetch-ideas";
 
-import { cookies } from "next/headers";
+import { v4 as uuid } from "uuid";
 import PaginationControls from "@/components/pagination-controls";
 
 export default async function IdeasList({ searchParams, orderBy }: {
@@ -20,13 +20,12 @@ export default async function IdeasList({ searchParams, orderBy }: {
 
   const response = await fetchIdeas(currentPage, undefined, query, industries, orderBy)
 
-  const userId = cookies().get('anonymousId')?.value || ""
 
   return (
     <div>
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-4">
         {response.ideas.map((item) => (
-          <IdeaItem key={item.id} item={item} userId={userId} />
+          <IdeaItem key={item.id} item={item} />
         )
         )}
       </div>

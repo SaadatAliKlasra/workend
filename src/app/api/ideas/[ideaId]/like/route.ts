@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { cookies } from "next/headers";
-import { v4 as uuidv4 } from 'uuid'
+
 
 export async function POST(req: NextRequest, { params }: { params: { ideaId: string } }) {
   const { ideaId } = params
@@ -17,16 +16,18 @@ export async function POST(req: NextRequest, { params }: { params: { ideaId: str
       { message: "Idea not found!" },
       { status: 404 })
   }
-  const exist = cookies().get('anonymousId')
-  if (!exist) {
-    cookies().set('anonymousId', uuidv4())
+
+  const { userId } = await req.json()
+  if (!userId) {
+    return NextResponse.json(
+      { message: "User not found!" },
+      { status: 404 })
   }
-  const anonymousId = cookies().get('anonymousId')
   try {
     await prisma.ideaLike.create({
       data: {
         ideaId: ideaId,
-        userId: anonymousId!.value
+        userId: userId
       }
     })
     return NextResponse.json({ message: "Idea liked!" }, {
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest, { params }: { params: { ideaId: str
       where: {
         ideaId_userId: {
           ideaId: ideaId,
-          userId: anonymousId!.value
+          userId: userId
         }
       }
     })

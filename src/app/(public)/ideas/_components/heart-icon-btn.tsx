@@ -1,34 +1,50 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import axios from 'axios';
 import { toast } from "react-toastify"
 import { useDebouncedCallback } from 'use-debounce';
-
+import { v4 as uuidv4 } from 'uuid'
 import { Button } from "@nextui-org/button";
 
 import { HeartIcon } from './heart-icon';
+import { IdeaLike } from '@prisma/client';
 
 type Props = {
   onClick?: () => void
-  likes: number,
+  likes: IdeaLike[],
   ideaId: string,
-  userLiked: boolean
 }
 
 const HeartIconBtn = (props: Props) => {
-  const [likes, setLikes] = React.useState(props.likes)
-  const [userLiked, setUserLiked] = React.useState(props.userLiked)
+  const [userId, setUserId] = useState<string | null>(null)
+  const [userLiked, setUserLiked] = useState<boolean>(false)
   // use debounce to prevent multiple clicks
 
+  useEffect(() => {
+    let userId = localStorage.getItem("userId")
+    if (!userId) {
+      userId = uuidv4()
+      localStorage.setItem("userId", userId)
+    }
+    setUserId(userId)
+    setUserLiked(props.likes.some((like) => like.userId === userId))
+
+  }, [])
 
   const likeClickHandler = useDebouncedCallback(() => {
+
+    // get or create uuid in local storage
+
+
     setUserLiked((userLiked) => !userLiked)
-    setLikes((likesCount) => userLiked ? likesCount - 1 : likesCount + 1)
-    axios.post(`/api/ideas/${props.ideaId}/like`).catch((err) => {
+
+    axios.post(`/api/ideas/${props.ideaId}/like`, {
+      userId: userId
+    }).catch((err) => {
       toast(err.message || "An error occurred", { type: "error", position: "bottom-right", theme: "colored", })
       setUserLiked((userLiked) => !userLiked)
-      setLikes((likesCount) => userLiked ? likesCount + 1 : likesCount - 1)
+
     })
   }, 500, { leading: true, trailing: false })
 

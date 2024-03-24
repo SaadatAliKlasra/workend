@@ -49,9 +49,16 @@ const Page = ({ searchParams }: {
         <div className="flex space-x-2 p-4">
           <SearchChip items={searchParams?.industries} />
         </div>
-        {/* <Suspense key={searchParams?.industries?.join() || searchParams?.search || searchParams?.page} fallback={<IdeasListPlaceholder count={8} />}> */}
-        <IdeasList searchParams={searchParams} />
-        {/* </Suspense> */}
+        <Suspense fallback={
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5">
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+          </div>
+        }>
+          <IdeasList searchParams={searchParams} />
+        </Suspense>
       </div>
     </div>
   )

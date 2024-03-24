@@ -1,10 +1,10 @@
 
 import { Suspense } from 'react'
-import IdeasListLoading from "@/app/(public)/ideas/ideas-list-placeholder";
 import SearchChip from "@/components/search/search-chip"
 import TrendingIdeas from './_components/trending-ideas';
 import RecentIdeas from './_components/recent-ideas';
 import { prisma } from '@/lib/db';
+import IdeasListPlaceholder from '@/app/(public)/ideas/ideas-list-placeholder';
 export default async function Page({ searchParams }: {
   searchParams?: {
     search?: string;
@@ -28,9 +28,16 @@ export default async function Page({ searchParams }: {
         <div className="flex space-x-2 p-4">
           <SearchChip items={searchParams?.industries} />
         </div>
-        {/* <Suspense fallback={<IdeasListLoading count={4} />}> */}
-        <TrendingIdeas searchParams={searchParams} />
-        {/* </Suspense> */}
+        <Suspense fallback={
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5">
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+          </div>
+        }>
+          <TrendingIdeas searchParams={searchParams} />
+        </Suspense>
       </div>
       <div className="my-4">
         <div className="text-2xl font-medium mb-1">Recent Ideas</div>
@@ -41,9 +48,16 @@ export default async function Page({ searchParams }: {
         <div className="flex space-x-2 p-4">
           <SearchChip items={searchParams?.industries} />
         </div>
-        {/* <Suspense fallback={<IdeasListLoading count={4} />}> */}
-        <RecentIdeas searchParams={searchParams} />
-        {/* </Suspense> */}
+        <Suspense fallback={
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5">
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+            <IdeasListPlaceholder />
+          </div>
+        }>
+          <RecentIdeas searchParams={searchParams} />
+        </Suspense>
       </div>
     </div>
   );
