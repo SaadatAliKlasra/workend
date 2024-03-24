@@ -1,12 +1,10 @@
 "use client"
-import { Card, CardHeader, CardBody, CardFooter, user } from "@nextui-org/react";
-import { v4 as uuid } from 'uuid'
+import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { Chip } from "@nextui-org/chip";
-import { Heart, Share2 } from 'lucide-react'
 import { Idea, IdeaLike, Industry } from '@prisma/client'
 import HeartIconBtn from './_components/heart-icon-btn'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
+
 
 
 type Props = {

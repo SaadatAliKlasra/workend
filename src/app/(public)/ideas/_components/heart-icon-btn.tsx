@@ -30,7 +30,7 @@ const HeartIconBtn = (props: Props) => {
     setUserId(userId)
     setUserLiked(props.likes.some((like) => like.userId === userId))
 
-  }, [])
+  }, [props.likes])
 
   const likeClickHandler = useDebouncedCallback(() => {
 

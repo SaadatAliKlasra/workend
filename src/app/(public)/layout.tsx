@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Nav from '@/components/navbar'
+import NavMenu from '@/components/navmenu'
 
 type Props = {
   children: React.ReactNode
@@ -9,7 +9,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <Fragment>
-      <Nav />
+      <NavMenu />
       <main className="p-2 lg:p-4">
         {children}
       </main>

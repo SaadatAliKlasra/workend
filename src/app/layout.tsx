@@ -8,7 +8,6 @@ import { Providers } from "./providers";
 import 'react-toastify/dist/ReactToastify.css'
 
 import "./globals.css";
-import { ClerkProvider } from '@clerk/nextjs'
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "600", "700", "800"] });
 
@@ -40,15 +39,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`chestnut text-foreground bg-background ${poppins.className}`}>
-          <Providers>
-            {children}
-            <ToastContainer position="bottom-right" hideProgressBar />
-          </Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`chestnut text-foreground bg-background ${poppins.className}`}>
+        <Providers>
+          {children}
+          <ToastContainer position="bottom-right" hideProgressBar />
+        </Providers>
+      </body>
+    </html>
   );
 }

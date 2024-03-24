@@ -1,15 +1,11 @@
 "use client"
-
-import { UserButton, auth } from "@clerk/nextjs";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import IdeasGeneratorButton from "./forms/ideas-generator-button";
 
-type Props = {
-  userLoggedIn: boolean
-}
-export default function NavMenu({ userLoggedIn }: Props) {
+
+export default function NavMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const pathName = usePathname()
 
@@ -21,10 +17,6 @@ export default function NavMenu({ userLoggedIn }: Props) {
     {
       name: "Ideas",
       href: "/ideas"
-    },
-    {
-      name: "Generate",
-      href: "/generate"
     }
   ];
 
@@ -50,27 +42,9 @@ export default function NavMenu({ userLoggedIn }: Props) {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {userLoggedIn ? (
-          <Fragment>
-            <NavbarItem className="hidden sm:flex">
-              <IdeasGeneratorButton />
-            </NavbarItem>
-            <NavbarItem className="hidden sm:flex">
-              <UserButton afterSignOutUrl='/sign-in' />
-            </NavbarItem>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <NavbarItem className="hidden sm:flex">
-              <Link href="/sign-in" title="Login">Login</Link>
-            </NavbarItem>
-            <NavbarItem className="hidden sm:flex">
-              <Button as={Link} title="Sign up" color="primary" href="/sign-up" variant="flat">
-                Sign Up
-              </Button>
-            </NavbarItem>
-          </Fragment>
-        )}
+        <NavbarItem className="hidden sm:flex">
+          <IdeasGeneratorButton />
+        </NavbarItem>
 
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -79,24 +53,10 @@ export default function NavMenu({ userLoggedIn }: Props) {
       </NavbarContent>
       {/* mobile menu */}
       <NavbarMenu>
-        {userLoggedIn ? (
-          <NavbarMenuItem>
-            <IdeasGeneratorButton />
-          </NavbarMenuItem>
-        ) : (
-          <Fragment>
-            <NavbarMenuItem>
-              <Button className="w-full" title="Login" as={Link} color="primary" href="/login" variant="flat">
-                Login
-              </Button>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <Button className="w-full" title="Sign up" as={Link} color="primary" href="/signup" variant="flat">
-                Sign Up
-              </Button>
-            </NavbarMenuItem>
-          </Fragment>
-        )}
+        <NavbarMenuItem>
+          <IdeasGeneratorButton />
+        </NavbarMenuItem>
+
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link color={item.href === pathName ? "primary" : "foreground"} href={item.href} title={item.name} className="w-full" size="lg">
