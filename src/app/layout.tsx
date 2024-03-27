@@ -15,6 +15,26 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "600", "700
 export const metadata: Metadata = {
   title: "Workend - AI Generated Business Ideas",
   description: "Need a new business idea? workend.co uses AI to help you think outside the box. Find great ideas, solve problems, and build a successful business.",
+  applicationName: "Workend",
+  authors: [{ name: 'Saadat Ali', url: 'https://saadatali.dev' }],
+  generator: "Next.js",
+  keywords: "business ideas, startup ideas, ai generated ideas, business idea generator, startup idea generator, business idea, startup idea, business, startup, idea, generator, ai, artificial intelligence, machine learning, workend, workend.co, aiideas, aiideas.com",
+  creator: "Saadat Ali",
+  publisher: "Saadat Ali",
+  robots: "index, follow",
+  twitter: {
+    card: 'summary_large_image',
+    site: '@Workend',
+    creator: '@saadat_ali',
+    images: 'https://workend.co/images/og.png',
+  },
+  verification: {
+    google: 'fXfvfQQWir7GPVRi0N5Gbfz-7qg7ZFDtGTvQaIO_f8I',
+  },
+  archives: "https://workend.co/ideas",
+  assets: "https://workend.co/images",
+  category: "Business",
+  classification: "Business Ideas",
   openGraph: {
     title: 'Workend - AI Generated Business Ideas',
     description: 'Need a new business idea? workend.co uses AI to help you think outside the box. Find great ideas, solve problems, and build a successful business.',
