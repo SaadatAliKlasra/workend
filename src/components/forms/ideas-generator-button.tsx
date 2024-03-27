@@ -25,9 +25,8 @@ const IdeasGeneratorButton = (props: Props) => {
 
   return (
 
-    <Button isDisabled={loading} variant="bordered" radius="full" onClick={generateIdeaHandler}>
-      <Disc3 className={clsx('w-4 h-4 mr-2', loading && 'animate-spin')} />
-      {clsx(loading ? "Fetching..." : "Random")}
+    <Button isLoading={loading} isDisabled={loading} variant="bordered" radius="full" onClick={generateIdeaHandler}>
+      Random
     </Button>
   )
 }
