@@ -1,8 +1,6 @@
 
 import IdeaItem from "./idea-item";
 import { fetchIdeas } from "@/actions/fetch-ideas";
-
-import { v4 as uuid } from "uuid";
 import PaginationControls from "@/components/pagination-controls";
 
 export default async function IdeasList({ searchParams, orderBy }: {

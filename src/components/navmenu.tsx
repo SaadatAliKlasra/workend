@@ -42,7 +42,7 @@ export default function NavMenu() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden sm:flex">
+        <NavbarItem>
           <IdeasGeneratorButton />
         </NavbarItem>
 
@@ -53,9 +53,6 @@ export default function NavMenu() {
       </NavbarContent>
       {/* mobile menu */}
       <NavbarMenu>
-        <NavbarMenuItem>
-          <IdeasGeneratorButton />
-        </NavbarMenuItem>
 
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
